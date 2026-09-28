@@ -1,15 +1,41 @@
-listing_amenities.property_id → properties.property_id
-ON DELETE CASCADE
-- Justification: when a property is deleted, it no longer has amenities to link, so the corresponding rows in listing_amenities are removed. This only deletes the link row, not the amenity itself in the amenities table.
+Integrity Constraints (Unit 1, updated in Unit 2 to match schema.sql)
 
-listing_amenities.amenity_id → amenities.amenity_id
-ON DELETE CASCADE
-- Justification: when an amenity is deleted from the catalog, any property links to it become meaningless, so those link rows are removed. This only deletes the link row, not the property itself.
+Primary keys
 
-viewings.property_id → properties.property_id
-ON DELETE CASCADE
-- Justification: once a property is deleted, its viewing history no longer serves an ongoing analytical purpose, so its viewing records are removed along with it.
+renters: renter_id
+properties: property_id
+amenities: amenity_id
+viewings: composite (renter_id, property_id, viewed_at)
+listing_amenities: composite (property_id, amenity_id)
 
-viewings.renter_id → renters.renter_id
+Foreign keys and ON DELETE behavior
+
+fk_viewings_renter: viewings.renter_id references renters.renter_id
 ON DELETE RESTRICT
-- Justification: the numeric metric duration_min is meant to be aggregated over time (total/average viewing duration). Cascading a renter's deletion would silently remove their viewing history and shrink these aggregate statistics. RESTRICT prevents deleting a renter while their viewing records still exist, forcing an explicit decision before removal and protecting the integrity of the aggregate stats.
+Justification: The duration_min metric is aggregated over time. Deleting a renter with CASCADE would silently remove their viewing history and shrink those statistics. RESTRICT blocks the deletion while viewings exist, forcing an explicit decision. SET NULL is not possible because renter_id is part of the primary key.
+
+fk_viewings_properties: viewings.property_id references properties.property_id
+ON DELETE CASCADE
+Justification: Once a property is deleted, its viewing history no longer serves an ongoing purpose, so the viewings are removed with it.
+
+fk_listings_property: listing_amenities.property_id references properties.property_id
+ON DELETE CASCADE
+Justification: A deleted property has no amenities to link, so only the link rows are removed, never the amenities themselves.
+
+fk_listings_amenities: listing_amenities.amenity_id references amenities.amenity_id
+ON DELETE CASCADE
+Justification: A deleted amenity makes every link to it meaningless, so only the link rows are removed, never the properties.
+
+NOT NULL
+
+Every column in every table is NOT NULL. Primary key columns are NOT NULL automatically.
+
+CHECK constraints
+
+chk_properties_cost_nonnegative: per_month_cost >= 0
+chk_properties_bedrooms_nonnegative: num_bedrooms >= 0
+chk_properties_bathrooms_nonnegative: num_bathrooms >= 0
+chk_properties_size_nonnegative: size >= 0
+chk_properties_floors_nonnegative: floors >= 0
+chk_properties_type_valid: property_type IN ('Apartment', 'House', 'Studio', 'Condo')
+chk_duration_min: duration_min > 0
