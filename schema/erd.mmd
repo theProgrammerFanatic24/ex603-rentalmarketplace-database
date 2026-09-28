@@ -1,0 +1,39 @@
+erDiagram
+RENTERS ||--o{ VIEWINGS : has
+PROPERTIES ||--o{ VIEWINGS : receives
+PROPERTIES ||--o{ LISTING_AMENITIES : has
+AMENITIES ||--o{ LISTING_AMENITIES : contained_in
+
+RENTERS {
+int renter_id PK
+string first_name
+string last_name
+}
+PROPERTIES {
+int property_id PK
+string street
+string city
+string state
+string zip
+boolean is_available
+decimal per_month_cost
+int num_bedrooms
+int num_bathrooms
+int size
+int floors
+string property_type
+}
+VIEWINGS {
+int renter_id PK, FK
+int property_id PK, FK
+timestamp viewed_at PK
+int duration_min
+}
+AMENITIES {
+int amenity_id PK
+string amenity_name
+}
+LISTING_AMENITIES {
+int property_id PK, FK
+int amenity_id PK, FK
+}
