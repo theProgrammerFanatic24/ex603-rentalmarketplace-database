@@ -20,3 +20,16 @@ Money is NUMERIC(10,2), never floating point.
 Names and addresses are split into parts so they can be filtered and sorted; the full name is computed at query time.
 schema.sql can be re-run at any time because it drops the tables first, in reverse creation order.
 ![ERD diagram](schema/erd.png)
+### Unit 4: From Rows to Insight
+
+| Query | File | Business question |
+|---|---|---|
+| 4.1a | `queries/unit4/q4_1.sql` | What does the platform look like overall: how many viewings, their total, average, shortest and longest duration, and how many distinct renters? |
+| 4.1b | `queries/unit4/q4_1.sql` | How many viewings does each property get, and how long do renters stay on average? |
+| 4.1c | `queries/unit4/q4_1.sql` | Which properties have enough viewings (more than 15) for their numbers to be meaningful? |
+| 4.1d | `queries/unit4/q4_1.sql` | How do viewing count and average duration vary by city and viewing status? |
+| 4.2A | `queries/unit4/q4_2.sql` | For each property, how many viewings did it have and how many were renter no-shows? |
+| 4.2B | `queries/unit4/q4_2.sql` | What is each city's viewing and no-show subtotal, and what is the platform-wide grand total? |
+| 4.2C | `queries/unit4/q4_2.sql` | What is the baseline no-show rate for high-volume properties? |
+
+Write-ups: `analysis/unit4.md` (Tasks 4.1 and 4.2, reflection) and `analysis/unit4-finding.md` (Task 4.3 breakdown for leadership).
