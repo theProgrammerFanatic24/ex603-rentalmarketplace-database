@@ -34,7 +34,7 @@ March lost 70% of its viewing minutes. Viewings fell from 21 to 11 and 3 of thos
 
 **4. Cancellations distort per-property trends** (Task 6.2 Part A). For property 4, four of five row-to-row changes came from a cancellation (duration 0) or a recovery from one, not from real changes in viewing length.
 
-**5. Properties stop receiving viewings for months** (Task 6.2 Part C). Eleven gaps longer than 60 days occurred across 9 of 13 properties; property 9 went 112 days without a viewing.
+**5. Properties stop receiving viewings for months** (Task 6.2 Part C). Eleven gaps longer than 60 days occurred across 9 of the 13 properties that have viewings (properties 14 and 15 have never been viewed, Unit 5); property 9 went 112 days without a viewing.
 
 **6. Demand is concentrated** (Task 6.1). Viewing counts range from 21 (property 6) to 6 (property 4), and the top five properties account for nearly half of all viewings (96 of 200).
 
